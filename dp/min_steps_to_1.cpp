@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 int getMinSteps(int n, int *memo)
 {
     if (n == 0 || n == 1)
