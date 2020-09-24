@@ -47,5 +47,5 @@ void printNodesSumToS(BinaryTreeNode<int> *rootS, BinaryTreeNode<int> *rootE, in
 
 void printNodesSumToS(BinaryTreeNode<int> *root, int s)
 {
-    // Write your code here
+    printNodesSumToS(root, root, s);
 }
