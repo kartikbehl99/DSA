@@ -23,7 +23,7 @@ int countWaysToMakeChange(int denominations[], int numDenominations, int value)
 {
     int **memo = new int *[numDenominations + 1];
 
-    for (int i = 0; i <= n; i++)
+    for (int i = 0; i <= numDenominations; i++)
     {
         memo[i] = new int[value + 1];
     }
