@@ -11,20 +11,21 @@ int findMaxSquareWithAllZeros(int **arr, int row, int col)
     int maxSize = max(findMaxSquareWithAllZeros(arr, row - 1, col - 1), max(findMaxSquareWithAllZeros(arr, row - 1, col), findMaxSquareWithAllZeros(arr, row, col - 1)));
 
     bool hasAll0s = true;
-    for (int i = 0; i < size; i++)
+    int s;
+    for (s = 0; s < size; s++)
     {
-        for (int j = 0; j < size; j++)
+        for (int i = 0; i < s; i++)
         {
-            if (arr[i][j] != 0)
+            for (int j = 0; j < s; j++)
             {
-                hasAll0s = false;
-                break;
+                if (arr[i][j] != 0)
+                {
+                    hasAll0s = false;
+                    break;
+                }
             }
         }
     }
 
-    if (!hasAll0s)
-        return maxSize;
-
-    return max(size, maxSize);
+    return max(s, maxSize);
 }
