@@ -38,3 +38,40 @@ int countWaysToMakeChange(int denominations[], int numDenominations, int value)
 
     return countWaysToMakeChange(denominations, numDenominations, value, memo);
 }
+
+int countWaysToMakeChangeBU(int denominations[], int numDenominations, int value)
+{
+    int **dp = new int *[numDenominations + 1];
+    for (int i = 0; i <= numDenominations; i++)
+    {
+        dp[i] = new int[value + 1];
+        for (int j = 0; j <= value; j++)
+        {
+            if (j == 0 && i != 0)
+                dp[i][j] = 1;
+            else
+                dp[i][j] = 0;
+        }
+    }
+
+    for (int i = 1; i <= numDenominations; i++)
+    {
+        for (int j = 1; j <= value; j++)
+        {
+            if (denominations[i - 1] <= j)
+                dp[i][j] = dp[i - 1][j] + dp[i][j - denominations[i - 1]];
+            else
+                dp[i][j] = dp[i - 1][j];
+        }
+    }
+
+    return dp[numDenominations][value];
+}
+
+int main()
+{
+    int denomination[4] = {2, 5, 3, 6};
+    int value = 10;
+
+    cout << countWaysToMakeChangeBU(denomination, 4, value);
+}

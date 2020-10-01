@@ -42,3 +42,35 @@ int knapsack(int *weights, int *values, int n, int maxWeight)
 
     return knapsack(weights, values, n, maxWeight, memo);
 }
+
+int knapsackBU(int *weights, int *values, int n, int maxWeight)
+{
+    int **dp = new int *[n + 1];
+    for (int i = 0; i <= n; i++)
+    {
+        dp[i] = new int[maxWeight + 1];
+        for (int j = 0; j <= maxWeight; j++)
+        {
+            dp[i][j] = 0;
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= maxWeight; j++)
+        {
+            if (weights[i - 1] <= j)
+                dp[i][j] = max(values[i - 1] + dp[i - 1][j - weights[i - 1]], dp[i - 1][j]);
+            else
+                dp[i][j] = dp[i - 1][j];
+        }
+    }
+    return dp[n][maxWeight];
+}
+
+int main()
+{
+    int weights[3] = {1, 2, 3};
+    int values[3] = {10, 15, 40};
+    int maxWeight = 6;
+    cout << knapsackBU(weights, values, 3, maxWeight);
+}

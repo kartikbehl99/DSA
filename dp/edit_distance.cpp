@@ -54,3 +54,5 @@ int editDistance(string s1, string s2)
 
     return editDistance(s1, s2, memo, 0, 0);
 }
+
+int editDistanceBU(string s1, string s2);

@@ -31,10 +31,28 @@ int cutRod(int *price, int n)
     return cutRod(price, n, memo);
 }
 
+int cutRodBU(int *price, int n)
+{
+    int *dp = new int[n + 1];
+
+    for (int i = 0; i <= n; i++)
+    {
+        dp[i] = 0;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = i; j >= 1; j--)
+        {
+            dp[i] = max(dp[i], price[j - 1] + dp[i - j]);
+        }
+    }
+    return dp[n];
+}
+
 int main()
 {
     int n = 8;
     int price[n] = {1, 5, 8, 9, 10, 17, 17, 20};
 
-    cout << cutRod(price, n);
+    cout << cutRodBU(price, n);
 }

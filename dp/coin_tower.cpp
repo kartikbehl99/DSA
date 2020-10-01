@@ -28,3 +28,44 @@ string solve(int n, int x, int y)
     }
     return "Whis";
 }
+
+string solveBU(int n, int x, int y)
+{
+    bool *dp = new bool[n + 1];
+
+    for (int i = 0; i <= n; i++)
+    {
+        dp[i] = false;
+    }
+
+    dp[1] = true;
+    dp[x] = true;
+    dp[y] = true;
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (i < x && i < y)
+        {
+            dp[i] = !dp[i - 1];
+        }
+        else if (i >= x && i <= y)
+        {
+            dp[i] = !dp[i - 1] || !dp[i - x];
+        }
+        else if (i >= y && i <= x)
+        {
+            dp[i] = !dp[i - 1] || !dp[i - y];
+        }
+        else if (i >= x && i >= y)
+        {
+            dp[i] = !dp[i - 1] || !dp[i - y] || !dp[i - x];
+        }
+    }
+
+    return dp[n] ? "Beerus" : "Whis";
+}
+
+int main()
+{
+    cout << solveBU(2, 3, 4);
+}
