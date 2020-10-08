@@ -28,14 +28,6 @@ public:
     }
 };
 
-int getHeight(BinaryTreeNode<int> *root)
-{
-    if (!root)
-        return 0;
-
-    return 1 + max(getHeight(root->left), getHeight(root->right));
-}
-
 augTree isBalancedUtil(BinaryTreeNode<int> *root)
 {
     if (!root)
